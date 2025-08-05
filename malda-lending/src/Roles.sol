@@ -34,11 +34,13 @@ contract Roles is Ownable, IRoles {
 
     bytes32 public constant REBALANCER = keccak256("REBALANCER");
     bytes32 public constant PAUSE_MANAGER = keccak256("PAUSE_MANAGER");
+    //@>i trusted only for rebalancing
     bytes32 public constant REBALANCER_EOA = keccak256("REBALANCER_EOA");
     bytes32 public constant GUARDIAN_PAUSE = keccak256("GUARDIAN_PAUSE");
     bytes32 public constant CHAINS_MANAGER = keccak256("CHAINS_MANAGER");
     bytes32 public constant PROOF_FORWARDER = keccak256("PROOF_FORWARDER");
     bytes32 public constant PROOF_BATCH_FORWARDER = keccak256("PROOF_BATCH_FORWARDER");
+    //@>i trusted only for its own jobs
     bytes32 public constant SEQUENCER = keccak256("SEQUENCER");
     bytes32 public constant GUARDIAN_BRIDGE = keccak256("GUARDIAN_BRIDGE");
     bytes32 public constant GUARDIAN_ORACLE = keccak256("GUARDIAN_ORACLE");

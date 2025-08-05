@@ -389,6 +389,7 @@ contract Operator is OperatorStorage, ImTokenOperationTypes, OwnableUpgradeable 
      * @inheritdoc IOperator
      */
     function getAccountLiquidity(address account) public view returns (uint256, uint256) {
+        //@>q very important function
         return _getHypotheticalAccountLiquidity(account, address(0), 0, 0);
     }
 

@@ -95,7 +95,7 @@ contract ZkVerifier is Ownable, IZkVerifier {
     function _checkAddresses() private view {
         require(address(verifier) != address(0), ZkVerifier_VerifierNotSet());
     }
-
+    //@>q how can attacker do  zkProof verification bypass attempts
     function __verify(bytes calldata journalEntry, bytes calldata seal) private view {
         verifier.verify(seal, imageId, sha256(journalEntry));
     }
