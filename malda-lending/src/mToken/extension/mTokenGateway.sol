@@ -218,6 +218,15 @@ contract mTokenGateway is OwnableUpgradeable, ImTokenGateway, ImTokenOperationTy
         emit AllowedCallerUpdated(msg.sender, caller, status);
     }
 
+   /*@>i lineaSelectors
+
+        mint(uint256)	0xa0712d68	Supply funds to lending market
+        redeem(uint256)	0xdb006a75	Withdraw supplied funds
+        borrow(uint256)	0xc5ebeaec	Borrow against collateral
+        repayBorrow(uint256)	0x0e752702	Repay borrowed amount
+        liquidateBorrow(address,uint256,address)	0xabd5a0e1	Liquidate undercollateralized position
+        No specific function (transfer)	0x00000000	Simple cross-chain transfer
+   */
     /**
      * @inheritdoc ImTokenGateway
      */
