@@ -351,7 +351,28 @@ abstract contract mTokenStorage is ImToken, ExponentialNoError {
         /* Calculate the current borrow interest rate */
         uint256 borrowRateMantissa =
             IInterestRateModel(interestRateModel).getBorrowRate(cashPrior, borrowsPrior, reservesPrior);
+            /*@>i
+        function getBorrowRate(uint256 cash, uint256 borrows, uint256 reserves) public view override returns (uint256) {
+        uint256 util = utilizationRate(cash, borrows, reserves);
+        if (util <= kink) {
+        return util * multiplierPerBlock / 1e18 + baseRatePerBlock;
+        } else {
+        uint256 normalRate = kink * multiplierPerBlock / 1e18 + baseRatePerBlock;
+        uint256 excessUtil = util - kink;
+        return excessUtil * jumpMultiplierPerBlock / 1e18 + normalRate;
+        }
+}
+function utilizationRate(uint256 cash, uint256 borrows, uint256 reserves) public pure override returns (uint256) {
+      if (borrows == 0) {
+      return 0;
+      }
+       //@>audit utilizationRate can be greater than 1e18, when cash + borrows - reserves < borrows
+      return borrows * 1e18 / (cash + borrows - reserves);
+}
+
+           */
         if (borrowRateMaxMantissa > 0) {
+            //@>audit there is a way to make borrowRateMantissa to very high and hence make an always revert here
             require(borrowRateMantissa <= borrowRateMaxMantissa, mt_BorrowRateTooHigh());
         }
 
