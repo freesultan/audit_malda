@@ -625,6 +625,7 @@ abstract contract mToken is mTokenConfiguration, ReentrancyGuard {
              *  redeemTokens = redeemAmountIn / exchangeRate
              *  redeemAmount = redeemAmountIn
              */
+            //@>audit this should be rounding up not down as users can redeem without any token burn
             redeemTokens = div_(redeemAmountIn, exchangeRate);
             redeemAmount = redeemAmountIn;
         }
